@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangtong.core.appstore.mapper.AppInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangtong.core.appstore.entity.AppInfo" >
+    <id column="appid" property="appid" />
+    <result column="name" property="name" />
+    <result column="url" property="url" />
+    <result column="icons" property="icons" />
+    <result column="price" property="price" />
+    <result column="size" property="size" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    appid, name, url, icons, price, size
+  </sql>
+  
+  <select id="selectByCatAndRank" resultMap="BaseResultMap">
+	SELECT t2.* FROM ranking t1, app_info t2 
+	WHERE t1.`appid` = t2.`appid` 
+		AND t1.`cat` = #{cat}
+		AND t1.`pos` = #{pos}
+		AND t1.`tab` = 1
+  </select>
+  
+  <select id="selectByAppid" parameterType="string" resultMap="BaseResultMap">
+	SELECT * FROM app_info t
+	WHERE t.`appid` = #{appid}
+  </select>
+  
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangtong.core.appstore.mapper.RankingMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangtong.core.appstore.entity.Ranking" >
+    <id column="cat" property="cat" />
+    <id column="tab" property="tab" />
+    <id column="pos" property="pos" />
+    <result column="appid" property="appid" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cat, tab, pos, appid
+  </sql>
+  
+  <select id="selectRankByAppid" resultMap="BaseResultMap" parameterType="string">
+	SELECT * FROM ranking t 
+	WHERE t.`appid` = #{appid} AND cat+0>6000 AND tab = 1;
+  </select>
+
+</mapper>
